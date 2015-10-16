@@ -29,5 +29,7 @@ public class Monster {
         bc=badconseq;
         price=prc;
     }
-    
+    public String toString(){
+      return "name = " + name+ "Combat levels =" + Integer.toString(combatLevel);
+    }
 }

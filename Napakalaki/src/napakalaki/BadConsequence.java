@@ -54,4 +54,8 @@ public class BadConsequence {
         specificHiddenTreasures=tHidden;
         specificVisibleTreasures=tVisible;
     }
+    
+    public String toString(){
+      return "Bad Consequence : " + text;
+    }
 }

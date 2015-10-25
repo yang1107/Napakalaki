@@ -4,19 +4,23 @@
 
 class Prize
    
+  def initialize( trs,  lv)
+    @treaures=trs
+    @level=lv
+  end
+ 
   def
-    initialize( trs,  lv)
-    treaures=trs
-    level=lv
+    getTreasures
+       @treasures
   end
   
   def
-    getTreasures()
-       return treasures
+    getLevel
+      @level
   end
   
   def
-    getLevel()
-       return level
+    to_s
+    "Tesoros Ganados:#{@treasures}\n Niveles ganados :#{@level}\n"
   end
 end

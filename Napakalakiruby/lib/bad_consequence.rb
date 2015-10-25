@@ -4,30 +4,35 @@
 
 class BadConsequence
   def 
-    initialize( txt,  lvs,  nVsbl,  nHddn)
-        text=txt
-        levels=lvs
-        nVisibleTreasures=nVsbl
-        nHiddenTreasures=nHddn
+    initialize( atext,  someLevels,  someVisibleTreasures,  someHiddenTreasures, someSpecificVisibleTreasures ,someSpecificHiddenTreasures,dh)
+        @text=atext
+        @levels=someLevels
+        @nVisibleTreasures=someVisibleTreasures
+        @nHiddenTreasures=someHiddenTreasures
+        @nSpecificVisibleTreasures=someSpecificVisibleTreasures
+        @nSpecificHiddenTreasures=someSpecificHiddenTreasures
+        @death=dh
+        
   end
   
+
   def
-     getText()
-        return text;
+     getText
+        @text;
   end
 
   def
-    getLevels()
-        return levels;
+    getLevels
+      @levels;
   end
   
   def
-     getnVisibleTreasures()
-        return nVisibleTreasures;
+     getnVisibleTreasures
+      @nVisibleTreasures;
   end
   def
-    getnHiddenTreasures()
-        return nHiddenTreasures;
+    getnHiddenTreasures
+        @nHiddenTreasures;
   end
   
   def
@@ -35,4 +40,33 @@ class BadConsequence
         return death;
     
   end
+  
+  def
+    BadConsequence.newLevelNumberOfTreasures(aText,someLevels,someVisibleTreasures,someHiddenTreasures)
+        text=aText
+        levels=someLevels
+        nVisibleTreasures=someVisibleTreasures
+        nHiddenTreasures=someHiddenTreasures
+  end
+  
+  def
+    BadConsequence.newLevelSpecificTreasures(aText,someLevels,someSpecificVisibleTreasures,someSpecificHiddenTreasures)
+        text=aText
+        levels=someLevels
+        nSpecificVisibleTreasures=someSpecificVisibleTreasures
+        nSpecificHiddenTreasures=someSpecificHiddenTreasures
+  end
+  
+  def
+    BadConsequence.newDeath(aText)
+      text=aText
+  end
+  
+  private_class_method:new
+  
+  def
+    to_s()
+      "#{@text}\n nivel: #{@levels}\n tesoros visibles: #{@nVisibleTreasures}\n tesoros invisibles #{@nHiddenTreasures}\n tesoro visible especifico #{@nSpecificVisibleTreasures}\n tesoro invisible especifico: #{@nSpecificHiddenTreasures}"
+  end
+ 
 end

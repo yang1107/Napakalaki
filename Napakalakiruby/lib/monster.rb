@@ -4,16 +4,14 @@
 
 class Monster
   def
-    initialize( nm,  lv,  badconseq,  prc)
-        name=nm;
-        combatLevel=lv;
-        bc=badconseq;
-        price=prc;
+    initialize( nm,  lv,prc,  badconseq)
+        @name=nm;
+        @combatLevel=lv;
+        @bc=badconseq;
+        @price=prc;
   end
-  def
-   name
-    combatLevel
-  end
+
+  
     def
     getName()
         return name;
@@ -22,8 +20,10 @@ class Monster
     getCombatLevel()
         return combatLevel;
     end
+
+    
     def
-    price
-     bc
+      to_s()
+      "#{@name}\n nivel de combate: #{@combatLevel}\n bad consecuence : #{@bc}\n premio: #{@price}"
     end
 end

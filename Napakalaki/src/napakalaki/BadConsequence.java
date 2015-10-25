@@ -17,7 +17,7 @@ public class BadConsequence {
     private int nVisibleTreasures;
     private int nHiddenTreasures;
     private boolean death;
-    
+
     public BadConsequence(String txt, int lvs, int nVsbl, int nHddn){
         text=txt;
         levels=lvs;

@@ -24,6 +24,6 @@ class Monster
     
     def
       to_s()
-      "#{@name}\n nivel de combate: #{@combatLevel}\n bad consecuence : #{@bc}\n premio: #{@price}"
+      "#{@name}\n nivel de combate: #{@combatLevel}\n #{@bc}\n  #{@price}"
     end
 end

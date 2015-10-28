@@ -4,9 +4,9 @@
 
 class Prize
    
-  def initialize( trs,  lv)
-    @treaures=trs
-    @level=lv
+  def initialize(treasures,levels)
+    @treasures=treasures
+    @level=levels
   end
  
   def
@@ -21,6 +21,6 @@ class Prize
   
   def
     to_s
-    "Tesoros Ganados:#{@treasures}\n Niveles ganados :#{@level}\n"
+    " Tesoros ganados: #{@treasures} \n Nivel ganados: #{@level}"
   end
 end

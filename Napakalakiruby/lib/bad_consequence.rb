@@ -41,32 +41,49 @@ class BadConsequence
     
   end
   
-  def
+#  def
+#    BadConsequence.newLevelNumberOfTreasures(aText,someLevels,someVisibleTreasures,someHiddenTreasures)
+#        text=aText
+#        levels=someLevels
+#        nVisibleTreasures=someVisibleTreasures
+#        nHiddenTreasures=someHiddenTreasures
+#  end
+#  
+#  def
+#    BadConsequence.newLevelSpecificTreasures(aText,someLevels,someSpecificVisibleTreasures,someSpecificHiddenTreasures)
+#        text=aText
+#        levels=someLevels
+#        nSpecificVisibleTreasures=someSpecificVisibleTreasures
+#        nSpecificHiddenTreasures=someSpecificHiddenTreasures
+#  end
+#  
+#  def
+#    BadConsequence.newDeath(aText)
+#      text=aText
+#  end
+  
+  
+   def
     BadConsequence.newLevelNumberOfTreasures(aText,someLevels,someVisibleTreasures,someHiddenTreasures)
-        text=aText
-        levels=someLevels
-        nVisibleTreasures=someVisibleTreasures
-        nHiddenTreasures=someHiddenTreasures
+        new(aText, someLevels, someVisibleTreasures, someHiddenTreasures,0,0,false)
   end
   
   def
     BadConsequence.newLevelSpecificTreasures(aText,someLevels,someSpecificVisibleTreasures,someSpecificHiddenTreasures)
-        text=aText
-        levels=someLevels
-        nSpecificVisibleTreasures=someSpecificVisibleTreasures
-        nSpecificHiddenTreasures=someSpecificHiddenTreasures
+       new(aText,someLevels,0, 0, someSpecificVisibleTreasures, someSpecificHiddenTreasures,false)
   end
   
   def
     BadConsequence.newDeath(aText)
-      text=aText
+     new(aText, 0, 0, 0, Array.new, Array.new, true)
   end
+  
   
   private_class_method:new
   
-  def
-    to_s()
-      "#{@text}\n nivel: #{@levels}\n tesoros visibles: #{@nVisibleTreasures}\n tesoros invisibles #{@nHiddenTreasures}\n tesoro visible especifico #{@nSpecificVisibleTreasures}\n tesoro invisible especifico: #{@nSpecificHiddenTreasures}"
-  end
+
+    def to_s
+      " Bad consequence: #{@text} \n Pierdes: #{@levels} niveles."
+    end
  
 end

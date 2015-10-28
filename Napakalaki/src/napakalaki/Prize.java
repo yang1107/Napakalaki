@@ -25,13 +25,13 @@ public class Prize {
         return level;
     }
     
-    public static void main(String[] args) {
-        Prize unPrize=new Prize(2,5);
-        System.out.println (unPrize.getLevel());
-    }
+//    public static void main(String[] args) {
+//        Prize unPrize=new Prize(2,5);
+//        System.out.println (unPrize.getLevel());
+//    }
     
     public String toString(){
-      return "Treasures= " + Integer.toString(treasures)+ "levels =" + Integer.toString(level);
+      return "Treasures= " + Integer.toString(treasures)+ "\nlevels =" + Integer.toString(level);
     }
              
 }

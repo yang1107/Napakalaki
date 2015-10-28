@@ -5,6 +5,7 @@
  */
 package napakalaki;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -14,6 +15,31 @@ import java.util.Arrays;
  */
 public class PruebaNapakalaki {
 
+   static void filtro_niveles10( ArrayList<Monster> Array){
+        for(int i=0;i<Array.size();i++){
+             if(Array.get(i).getCombatLevel()>10)
+                 System.out.println(Array.get(i));
+        }
+    }
+   
+   static void filtro_pierde_nivel(ArrayList<Monster> Array){
+       for(int i=0;i<Array.size();i++){
+          if(Array.get(i).bc.getnHiddenTreasures()==0 && Array.get(i).bc.getnVisibleTreasures()==0 && Array.get(i).bc.getLevels()!=0 ){
+                  System.out.println(Array.get(i));
+           }
+       }
+   }
+   
+   
+   static void filtro_gana_nivel(ArrayList<Monster> Array){
+       for(int i=0;i<Array.size();i++){
+          if(Array.get(i).price.getLevel()>1){
+              System.out.println(Array.get(i));
+          }
+       }
+   }
+   
+  
     /**
      * @param args the command line arguments
      */
@@ -119,7 +145,26 @@ public class PruebaNapakalaki {
         Prize prize19 = new Prize(1,1);
         monstruos.add(new Monster("Bicefalo",20,badConsequence19,prize19));
         
+
         
+//         tienen un nivel de combate superio a 10
+        
+        //filtro_niveles10(monstruos);
+        
+         
+         //tiene un mal de rollo que implique solo perdida de niveles
+        //funciona mal
+        
+            //filtro_pierde_nivel(monstruos);
+       
+       // buen rollo implique ganancia de nivel superior a 1
+
+      // filtro_gana_nivel(monstruos);
+        
+        
+       //su mal rollo implique la perdida de un determinado tipo de tesoro
+       
+       
     }
         
 }

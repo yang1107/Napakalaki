@@ -20,8 +20,8 @@ public class Monster {
         return combatLevel;
     }
     
-    private Prize price;
-    private BadConsequence bc;
+    public Prize price;
+    public BadConsequence bc;
     
     public Monster(String nm, int lv, BadConsequence badconseq, Prize prc){
         name=nm;
@@ -30,6 +30,6 @@ public class Monster {
         price=prc;
     }
     public String toString(){
-      return "name = " + name+ "Combat levels =" + Integer.toString(combatLevel);
+      return "name = " + name+ "\nCombat levels = " + combatLevel + "\n" + bc + "\n " + price;
     }
 }

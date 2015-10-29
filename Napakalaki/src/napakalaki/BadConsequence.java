@@ -55,6 +55,14 @@ public class BadConsequence {
         specificVisibleTreasures=tVisible;
     }
     
+    public ArrayList<TreasureKind> getSpecificVisibleTreasures() {
+        return specificVisibleTreasures;
+    }
+
+    public ArrayList<TreasureKind> getSpecificHiddenTreasures() {
+        return specificHiddenTreasures;
+    }
+    
     public String toString(){
       return "Bad Consequence : " + text;
     }

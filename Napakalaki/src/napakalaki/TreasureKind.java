@@ -9,6 +9,6 @@ package napakalaki;
  *
  * @author chen__000
  */
-public enum TreasureKind {ARMOR, ONEHAND, BOTHHANDS, HELMET, SHOES
-    
+public enum TreasureKind {
+    ARMOR, ONEHAND, BOTHHANDS, HELMET, SHOES  
 }

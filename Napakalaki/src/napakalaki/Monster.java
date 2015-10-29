@@ -30,6 +30,6 @@ public class Monster {
         price=prc;
     }
     public String toString(){
-      return "name = " + name+ "\nCombat levels = " + combatLevel + "\n" + bc + "\n " + price;
+      return name+ "\nNivel de combate = " + combatLevel + "\n" + bc + "\n" + price;
     }
 }

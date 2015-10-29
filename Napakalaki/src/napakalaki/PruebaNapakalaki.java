@@ -19,13 +19,15 @@ public class PruebaNapakalaki {
         for(int i=0;i<Array.size();i++){
              if(Array.get(i).getCombatLevel()>10)
                  System.out.println(Array.get(i));
+                  System.out.println(" ");
         }
     }
    
-   static void filtro_pierde_nivel(ArrayList<Monster> Array){
+   static void filtro_bc_pierde_nivel(ArrayList<Monster> Array){
        for(int i=0;i<Array.size();i++){
-          if(Array.get(i).bc.getnHiddenTreasures()==0 && Array.get(i).bc.getnVisibleTreasures()==0 && Array.get(i).bc.getLevels()!=0 ){
+          if(Array.get(i).bc.getSpecificHiddenTreasures().size()==0&&Array.get(i).bc.getSpecificVisibleTreasures().size()==0&&Array.get(i).bc.getnHiddenTreasures()==0 && Array.get(i).bc.getnVisibleTreasures()==0 && Array.get(i).bc.getLevels()!=0 ){
                   System.out.println(Array.get(i));
+                  System.out.println(" ");
            }
        }
    }
@@ -35,10 +37,19 @@ public class PruebaNapakalaki {
        for(int i=0;i<Array.size();i++){
           if(Array.get(i).price.getLevel()>1){
               System.out.println(Array.get(i));
+              System.out.println(" ");
           }
        }
    }
    
+      static void filtro_bc_pierde_tesoros(ArrayList<Monster> Array){
+       for(int i=0;i<Array.size();i++){
+          if(Array.get(i).bc.getSpecificHiddenTreasures().size()!=0 || Array.get(i).bc.getSpecificVisibleTreasures().size()!=0||Array.get(i).bc.getnHiddenTreasures()!=0 || Array.get(i).bc.getnVisibleTreasures()!=0  ){
+                  System.out.println(Array.get(i));
+                  System.out.println(" ");
+           }
+       }
+   }
   
     /**
      * @param args the command line arguments
@@ -46,6 +57,8 @@ public class PruebaNapakalaki {
     public static void main(String[] args) {
         // TODO code application logic here
         ArrayList<Monster> monstruos = new ArrayList();
+        
+        //creacion de monstruos
         
         BadConsequence badConsequence1 = new BadConsequence("Pierdes 5 niveles y 3 tesoros visibles",5,3,0);
         Prize prize1 = new Prize(4,2);
@@ -147,23 +160,24 @@ public class PruebaNapakalaki {
         
 
         
-//         tienen un nivel de combate superio a 10
+        //comprobaciones
+
+//        Monster m1;
+//        BadConsequence badConsequence20 = new BadConsequence("Te atrapan para llevarte de fiesta y te dejan caer en mitad del vuelo. Descarta 1 mano visible y 1 mano oculta",0,
+//                                                             new ArrayList(Arrays.asList(TreasureKind.ONEHAND)),
+//                                                             new ArrayList(Arrays.asList(TreasureKind.ONEHAND)));
+//        Prize prize20 = new Prize(4,1);
+//        m1=new Monster("Angeles de la noche ibicenca",14,badConsequence20,prize20);
+//        System.out.println(m1);
+//        
         
         //filtro_niveles10(monstruos);
         
-         
-         //tiene un mal de rollo que implique solo perdida de niveles
-        //funciona mal
-        
-            //filtro_pierde_nivel(monstruos);
-       
-       // buen rollo implique ganancia de nivel superior a 1
+         filtro_bc_pierde_nivel(monstruos);
 
       // filtro_gana_nivel(monstruos);
         
-        
-       //su mal rollo implique la perdida de un determinado tipo de tesoro
-       
+      // filtro_bc_pierde_tesoros(monstruos);
        
     }
         

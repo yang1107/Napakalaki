@@ -3,9 +3,10 @@
 # and open the template in the editor.
 
 module TreasureKind
-    ARMOR=:armor
-    ONEHAND=:onehand
-    BOTHHAND=:bothhand
-    HELMET=:helmet
-    SHOES=:shoes
+     ARMOR = :ARMOR
+    ONEHAND = :ONEHAND
+    BOTHHAND = :BOTHHAND
+    HELMET = :HELMET
+    SHOES = :SHOES
+    
 end

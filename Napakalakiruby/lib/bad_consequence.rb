@@ -18,49 +18,37 @@ class BadConsequence
 
   def
      getText
-        @text;
+        @text
   end
 
   def
     getLevels
-      @levels;
+      @levels
   end
   
   def
      getnVisibleTreasures
-      @nVisibleTreasures;
+      @nVisibleTreasures
   end
   def
     getnHiddenTreasures
-        @nHiddenTreasures;
+        @nHiddenTreasures
   end
   
   def
-  getDeath()
-        return death;
-    
+  getDeath
+       @death
   end
   
-#  def
-#    BadConsequence.newLevelNumberOfTreasures(aText,someLevels,someVisibleTreasures,someHiddenTreasures)
-#        text=aText
-#        levels=someLevels
-#        nVisibleTreasures=someVisibleTreasures
-#        nHiddenTreasures=someHiddenTreasures
-#  end
-#  
-#  def
-#    BadConsequence.newLevelSpecificTreasures(aText,someLevels,someSpecificVisibleTreasures,someSpecificHiddenTreasures)
-#        text=aText
-#        levels=someLevels
-#        nSpecificVisibleTreasures=someSpecificVisibleTreasures
-#        nSpecificHiddenTreasures=someSpecificHiddenTreasures
-#  end
-#  
-#  def
-#    BadConsequence.newDeath(aText)
-#      text=aText
-#  end
+  def
+    getnSpecificVisibleTreasures
+       @nSpecificVisibleTreasures
+  end
+  
+  def
+     getnSpecificHiddenTreasures
+       @nSpecificHiddenTreasures
+  end
   
   
    def
@@ -83,7 +71,7 @@ class BadConsequence
   
 
     def to_s
-      " Bad consequence: #{@text} \n Pierdes: #{@levels} niveles."
+      "Bad consequence: #{@text} \nPierdes: #{@levels} niveles."
     end
  
 end

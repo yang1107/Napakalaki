@@ -13,17 +13,26 @@ class Monster
 
   
     def
-    getName()
-        return name;
+    getName
+        @name
     end
     def
-    getCombatLevel()
-        return combatLevel;
+    getBadConsequence
+        @bc
     end
 
+    def
+    getPrice
+        @price
+    end
+    
+    def
+    getCombatLevel
+        @combatLevel
+    end
     
     def
       to_s()
-      "#{@name}\n nivel de combate: #{@combatLevel}\n #{@bc}\n  #{@price}"
+      "#{@name}\nnivel de combate: #{@combatLevel}\n#{@bc}\n#{@price}"
     end
 end

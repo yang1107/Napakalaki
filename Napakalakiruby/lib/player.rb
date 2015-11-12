@@ -14,50 +14,7 @@ class Player
     @hiddenTreasures=Array.new
   end
    
-private def bringToLife
-       @dead=false
-  end
-   
-private def  getCombatLevel
-     lv=@level
-     visibleTreasures.each {|t| lv+=t.bonus}
-     hiddenTreasures.each {|t| lv+=t.bonus}
-
-     return lv
-  end
-   
-private def incrementLevels(i)
-      @level+=i
-  end
-   
-private def decrementLevels(i)
-       @level-=i
-  end
-   
-private def setPendingBadConsequence(b)
-      @pendingBadConsequence=b 
-  end
-   
-private def applyPrize( m)
-       
-  end
-   
-private def canMakeTreasureVisible(t)
-       
-  end
-    
-private def howManyVisibleTreasures(tKind)
-     i=0
-     @visibleTreasures.each {|t| if t.type ==tkind then i=il+1   end}
-     return i
-  end
-   
-private def dieIfNotTreasures
-    if(@visibleTreasures.length==0&&@hiddenTreasures.length==0)
-      dead=true
-    end
-  end
-   
+  
   def isDead
       return @dead
   end
@@ -99,15 +56,71 @@ private def dieIfNotTreasures
        @enemy=e
   end
    
-  private def giveMeATreasure
-       
-  end
-   
  def canISteal
      @canISteal
   end
    
- private def canYouGiveMeATreasure
+
+   
+  def discardAllTreasures
+       
+  end
+    
+  private
+  
+  def bringToLife
+       @dead=false
+  end
+   
+def  getCombatLevel
+     lv=@level
+     visibleTreasures.each {|t| lv+=t.bonus}
+     hiddenTreasures.each {|t| lv+=t.bonus}
+
+     return lv
+  end
+   
+def incrementLevels(i)
+      @level+=i
+  end
+   
+ def decrementLevels(i)
+       @level-=i
+  end
+   
+def setPendingBadConsequence(b)
+      @pendingBadConsequence=b 
+  end
+   
+ def applyPrize( m)
+       
+  end
+  
+ def applyBadConsequence(b)
+   
+ end
+   
+def canMakeTreasureVisible(t)
+       
+  end
+    
+ def howManyVisibleTreasures(tKind)
+     i=0
+     @visibleTreasures.each {|t| if t.type ==tkind then i=il+1   end}
+     return i
+  end
+   
+ def dieIfNotTreasures
+    if(@visibleTreasures.length==0&&@hiddenTreasures.length==0)
+      dead=true
+    end
+  end
+  
+ def giveMeATreasure
+       
+  end
+ 
+ def canYouGiveMeATreasure
        res=false
        if(@hiddenTreasures.length>0 && @visibleTreasures.length>0)
          res=true
@@ -115,12 +128,7 @@ private def dieIfNotTreasures
        res
   end
    
-private def haveStolen
+ def haveStolen
        @canISteal=false
   end
-   
-  def discardAllTreasures
-       
-  end
-    
 end

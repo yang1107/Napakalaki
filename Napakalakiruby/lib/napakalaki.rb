@@ -15,7 +15,7 @@ def initialize(cp,p,d,cm)
     @currentMonster=cm
   end
   
-  private def getInstance
+  def getInstance
     return Napakalaki.instance
   end
   

@@ -1,16 +1,23 @@
 # To change this license header, choose License Headers in Project Properties.
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
+require "singleton"
 
 class CardDealer
-  include singleton
+  include Singleton
   
   attr_accesor :unusedMonsters,:usedMonsters,:unusedTreasures,:usedTreasures
   
-  def initialize
-    
+  def initialize(unusedM,usedM,unusedT,usedT)
+    @unusedMonsters=unusedM
+    @usedMonsters=usedM
+    @unusedTreasures=unusedT
+    @usedTreasures=usedT
   end
   
+  def getInstance
+    return CardDealer.instance
+  end
   private def initTreasureCardDeck
        @unusedTreasures << Treasure.new("Si mi amo", 4, TreasureKind::HELMET)
        @unusedTreasures << Treasure.new("Botas de investigacion", 3, TreasureKind::SHOES)
@@ -124,7 +131,7 @@ class CardDealer
     collections.shuffle(@unusedTreasures)
   end
    
-  def shuffleMonsters
+  private def shuffleMonsters
        collections.shuffle(@unusedMonsters)
   end
   

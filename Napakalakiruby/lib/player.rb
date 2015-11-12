@@ -4,52 +4,55 @@
 
 class Player
   
-  attr_reader :name,:level,:dead,:canISteal,:enemy,:hiddenTreasures,:visibleTreasures,:pendingBadConsequence
+  attr_reader :name,:level,:dead,:canISteal,:enemy,:visibleTreasures,:hiddenTreasures,:pendingBadConsequence
   @@MAXLEVEL=10
   
-  def initialize
-    
+  def initialize(nm)
+    @name=nm
+    @level=1
+    @visibleTreasures=Array.new 
+    @hiddenTreasures=Array.new
   end
    
-  def bringToLife
+private def bringToLife
        @dead=false
   end
    
-  def getCombatLevel
-       
+private def  getCombatLevel
+     lv=@level
+     visibleTreasures.each {|t| lv+=t.bonus}
+     hiddenTreasures.each {|t| lv+=t.bonus}
+
+     return lv
   end
    
-  def incrementLevels(i)
+private def incrementLevels(i)
       @level+=i
   end
    
-  def decrementLevels(i)
+private def decrementLevels(i)
        @level-=i
   end
    
-  def setPendingBadConsequence(b)
+private def setPendingBadConsequence(b)
       @pendingBadConsequence=b 
   end
    
-  def applyPrize( m)
+private def applyPrize( m)
        
   end
    
-  def canMakeTreasureVisible(t)
+private def canMakeTreasureVisible(t)
        
   end
     
-  def howManyVisibleTreasures(tKind)
+private def howManyVisibleTreasures(tKind)
      i=0
-     @visibleTreasure.each do |t|
-       if(t.type==tKind)
-         i=i+1
-       end
-     end
+     @visibleTreasures.each {|t| if t.type ==tkind then i=il+1   end}
      return i
   end
    
-  def dieIfNotTreasures
+private def dieIfNotTreasures
     if(@visibleTreasures.length==0&&@hiddenTreasures.length==0)
       dead=true
     end
@@ -96,15 +99,15 @@ class Player
        @enemy=e
   end
    
-  def giveMeATreasure
+  private def giveMeATreasure
        
   end
    
-  def canISteal
+ def canISteal
      @canISteal
   end
    
-  def canYouGiveMeATreasure
+ private def canYouGiveMeATreasure
        res=false
        if(@hiddenTreasures.length>0 && @visibleTreasures.length>0)
          res=true
@@ -112,12 +115,12 @@ class Player
        res
   end
    
-  def haveStolen
+private def haveStolen
        @canISteal=false
   end
    
   def discardAllTreasures
        
   end
-   
+    
 end

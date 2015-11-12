@@ -1,29 +1,37 @@
 # To change this license header, choose License Headers in Project Properties.
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
+require "singleton"
 
 class Napakalaki
-  include singleton
+  include Singleton
   
   attr_accesor:currentPlayer,:players,:dealer,:currentMonster
   
-  def initialize
+def initialize(cp,p,d,cm)
+    @currentPlayer=cp
+    @players=p
+    @dealer=d
+    @currentMonster=cm
+  end
+  
+  private def getInstance
+    return Napakalaki.instance
+  end
+  
+  private def initPlayers(names)
     
   end
   
-  def initPlayers(names)
-    
-  end
-  
-  def nextPlayer
+  private def nextPlayer
         
   end
     
-  def nextTurnAllowed
+  private def nextTurnAllowed
         
   end
     
-  def setEnemies
+  private def setEnemies
         
   end
     

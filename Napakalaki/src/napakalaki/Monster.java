@@ -12,6 +12,8 @@ package napakalaki;
 public class Monster {
     private String name;
     private int combatLevel;
+     public Prize price;
+    public BadConsequence bc;
     
     public String getName(){
         return name;
@@ -20,8 +22,7 @@ public class Monster {
         return combatLevel;
     }
     
-    public Prize price;
-    public BadConsequence bc;
+   
     
     public Monster(String nm, int lv, BadConsequence badconseq, Prize prc){
         name=nm;
@@ -32,4 +33,18 @@ public class Monster {
     public String toString(){
       return name+ "\nNivel de combate = " + combatLevel + "\n" + bc + "\n" + price;
     }
+    
+    public BadConsequence getBadConsequence(){
+        return null;
+    }
+    
+    public int getLevelsGained(){
+        return this.price.getLevel();
+    }
+    
+    public int getTreasuresGained(){
+        return this.price.getTreasures();
+    }
+    
+    
 }

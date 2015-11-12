@@ -12,11 +12,14 @@ import java.util.ArrayList;
  * @author chen__000
  */
 public class BadConsequence {
+    int MAXTREASURES=10;
     private String text;
     private int levels;
     private int nVisibleTreasures;
     private int nHiddenTreasures;
     private boolean death;
+    private ArrayList<TreasureKind> specificHiddenTreasures=new ArrayList();
+    private ArrayList<TreasureKind> specificVisibleTreasures=new ArrayList();
 
     public BadConsequence(String txt, int lvs, int nVsbl, int nHddn){
         text=txt;
@@ -44,9 +47,6 @@ public class BadConsequence {
         return death;
     }
     
-
-    private ArrayList<TreasureKind> specificHiddenTreasures=new ArrayList();
-    private ArrayList<TreasureKind> specificVisibleTreasures=new ArrayList();
     
     public BadConsequence(String txt, int lvs, ArrayList<TreasureKind> tVisible, ArrayList<TreasureKind> tHidden){
         text=txt;
@@ -66,4 +66,27 @@ public class BadConsequence {
     public String toString(){
       return "Bad Consequence : " + text;
     }
+    
+    public boolean isEmpty(){
+       boolean empty=false;
+       if(levels==0&&nHiddenTreasures==0&&nVisibleTreasures==0 && death==false
+               &&specificHiddenTreasures.isEmpty()&&specificHiddenTreasures.isEmpty()){
+           empty=true;
+       }
+       return empty;
+    }
+    
+    public void substractVisibleTreasure(Treasure t){
+        
+    }
+    
+     public void substractHiddenTreasure(Treasure t){
+        
+    }
+    
+    public BadConsequence adjustToFitTreasureLists(ArrayList<Treasure> v,ArrayList<Treasure> h){
+        return null;
+    }
+    
+    
 }

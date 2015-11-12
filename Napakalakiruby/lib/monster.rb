@@ -35,4 +35,12 @@ class Monster
       to_s()
       "#{@name}\nnivel de combate: #{@combatLevel}\n#{@bc}\n#{@price}"
     end
+    
+    def getLevelsGained()
+      return self.price.getLevel
+    end
+    
+    def getTreasuresGained
+      return self.price.getTreasures
+    end
 end

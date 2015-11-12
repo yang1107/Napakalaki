@@ -3,6 +3,7 @@
 # and open the template in the editor.
 
 class BadConsequence
+  
   def 
     initialize( atext,  someLevels,  someVisibleTreasures,  someHiddenTreasures, someSpecificVisibleTreasures ,someSpecificHiddenTreasures,dh)
         @text=atext
@@ -74,4 +75,27 @@ class BadConsequence
       "Bad consequence: #{@text} \nPierdes: #{@levels} niveles."
     end
  
+    def isEmpty
+      empty=false
+      if(@levels==0&&@death==false&&@nHiddenTreasures==0&&nVisibleTreasures==0
+          @nSpecificHiddenTreasures.length==0&&@nSpecificVisibleTreasures.length==0)
+        empty=true
+      end
+      return empty
+    end
+    
+    def substractVisibleTreasure(t)
+      
+    end
+    
+    def substractHiddenTreasure(t)
+      
+    end
+    
+    def adjustToFitTreasureLists(v,h)
+      
+    end
+    
+    
+    
 end

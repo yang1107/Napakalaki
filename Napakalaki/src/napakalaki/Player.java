@@ -25,6 +25,9 @@ public class Player {
    
    public Player(String nm){
        name=nm;
+       level=1;
+       hiddenTreasures=new ArrayList();
+       visibleTreasures=new ArrayList();
    }
    
    public String getName(){

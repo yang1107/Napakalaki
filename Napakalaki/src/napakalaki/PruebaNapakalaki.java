@@ -173,7 +173,7 @@ public class PruebaNapakalaki {
         
         //filtro_niveles10(monstruos);
         
-         filtro_bc_pierde_nivel(monstruos);
+         //filtro_bc_pierde_nivel(monstruos);
 
       // filtro_gana_nivel(monstruos);
         

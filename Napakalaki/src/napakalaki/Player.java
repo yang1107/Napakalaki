@@ -43,9 +43,6 @@ public class Player {
        for(Treasure t: visibleTreasures){
            lv=lv+t.getBonus();
        }
-        for(Treasure t: hiddenTreasures){
-           lv=lv+t.getBonus();
-       }
         return lv;
    }
    
@@ -66,7 +63,26 @@ public class Player {
    }
    
    private boolean canMakeTreasureVisible(Treasure t){
-       return false;
+       boolean res=true;
+       if(t.getType()!=TreasureKind.ONEHAND){
+       for(Treasure tre: visibleTreasures){
+           if(t.getType()==tre.getType()){
+               res=false;
+           }
+       }
+      }
+       else{
+           int i=0;
+           for(Treasure tre: visibleTreasures){
+           if(t.getType()==TreasureKind.ONEHAND){
+               i++;
+           }
+           }
+           if(i>1){
+               res=false;
+           }
+       }
+        return res;
    }
     
    private int howManyVisibleTreasures(TreasureKind tKind){

@@ -75,8 +75,6 @@ class Player
 def  getCombatLevel
      lv=@level
      visibleTreasures.each {|t| lv+=t.bonus}
-     hiddenTreasures.each {|t| lv+=t.bonus}
-
      return lv
   end
    

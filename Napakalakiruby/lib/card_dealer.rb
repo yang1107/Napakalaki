@@ -136,11 +136,31 @@ class CardDealer
   end
   
   def nextTreasure
-       
+    if(@unusedTreasures.length==0)
+      @usedTreasures.each do |u|
+        @unusedTreasures<<u
+      end
+      shuffleTreasures
+      @usedTreasures.clear
+    end
+    
+    aux=@unusedTreasures[0]
+      @usedTreasures<<aux
+      @unusedTreasures.delete(aux)
   end
    
   def nextMonster
-       
+       if(@unusedMonsters.length==0)
+      @usedMonsters.each do |u|
+        @unusedMonsters<<u
+      end
+      shuffleMonsters
+      @usedMonsters.clear
+    end
+    
+    aux=@unusedMonsters[0]
+      @usedMonsters<<aux
+      @unusedMonsters.delete(aux)
   end
    
   def giveTreasureBack(t)
@@ -151,8 +171,9 @@ class CardDealer
        @usedMonsters.add(m)
   end
    
-  def void initCards
-       
+  def initCards
+       initTreasuresCardDeck #1.3.1
+       initMonsterCardDeck #1.3.2
   end
   
 end

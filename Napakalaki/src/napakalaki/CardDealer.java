@@ -15,7 +15,7 @@ import java.util.Collections;
  */
 public class CardDealer {
     
-   // private static CardDealer instance = null;
+    private static CardDealer instance = null;
     private ArrayList<Monster> usedMonsters;
     private ArrayList<Monster> unusedMonsters;
     private ArrayList<Treasure> usedTreasures;
@@ -183,11 +183,33 @@ public class CardDealer {
        Collections.shuffle(unusedMonsters);
    }
    public Treasure nextTreasure(){
-       return null;
+       if(this.unusedTreasures.size()==0){
+          for(int i=0;i<this.usedTreasures.size();i++){
+               this.unusedTreasures.add(this.usedTreasures.get(i));
+           }
+           this.usedTreasures.clear();
+           this.shuffleTreasures();
+       }
+           Treasure aux;
+           aux=this.unusedTreasures.get(0);
+           this.usedTreasures.add(aux);
+           this.unusedTreasures.remove(0);
+           return aux;
    }
    
    public Monster nextMonster(){
-       return null;
+       if(this.unusedMonsters.isEmpty()){
+          for(int i=0;i<this.usedMonsters.size();i++){
+               this.unusedMonsters.add(this.usedMonsters.get(i));
+           }
+           this.usedMonsters.clear();
+           this.shuffleMonsters();
+       }
+           Monster aux;
+           aux=this.unusedMonsters.get(0);
+           this.usedMonsters.add(aux);
+           this.unusedMonsters.remove(0);
+           return aux;
    }
    
    public void giveTreasureBack(Treasure t){
@@ -199,7 +221,8 @@ public class CardDealer {
    }
    
    public void initCards(){
-       
+       this.initTreasureCardDeck();  //1.3.1
+       this.initTreasureCardDeck();  //1.3.2
    }
    
 }

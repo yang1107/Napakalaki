@@ -179,8 +179,7 @@ public class PruebaNapakalaki {
         
       // filtro_bc_pierde_tesoros(monstruos);
        
-        
-        
+     
   
     }
         

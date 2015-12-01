@@ -19,8 +19,26 @@ class Player
       return @dead
   end
    
-  def combat
+  def combat(m)
+       @myLevel=self.getCombatLevel  #1.1.1
+       @monsterLevel=m.getCombatLevel  #1.1.2
        
+    if(myLevel>monsterLevel)
+      self.applyPrize(m)  #1.1.3
+      
+      if(myLevel>=@MAXLEVEL)
+        @result=[CombatResult::WINGAME]
+      else
+        result=[CombatResult::WIN]
+      end
+      
+    else
+      self.applyBadConsequence(m)  #1.1.4
+      
+      result=[CombatResult::LOSE]
+    end
+    
+    return result   #1.1.10
   end
    
   def makeTreasureVisible(t)
@@ -31,7 +49,7 @@ class Player
        end
   end 
    
-  def discardVisibleTreasure( t)
+  def discardVisibleTreasures( t)
     @visibleTreasures.delete(t) #1.2.1
     if((@pendingBadConsequence!=nil)&&(!@pendingBadConsequence.isEmpty)) 
       @pendingBadConsequence.substractVisibleTreasure(t)  #1.2.2
@@ -39,7 +57,7 @@ class Player
     dieIfNoTreasures   #1.2.3
   end
    
-  def discardHiddenTreasure( t)
+  def discardHiddenTreasures( t)
       @hiddenTreasures.delete(t) #1.2.1
     if((@pendingBadConsequence!=nil)&&(!@pendingBadConsequence.isEmpty)) 
       @pendingBadConsequence.substractHiddenTreasure(t)  #1.2.2
@@ -100,14 +118,17 @@ class Player
 
    
   def discardAllTreasures
-       @visibleTreasures.each do |vt|
-         @treasure=@visibleTreasures.next #1.1
-         discardVisibleTreasure(treasure) #1.2
+    @visiblet=Array.new
+    @hiddent=Array.new
+    visible=Array.new(@visibleTreasures)
+    hiddent=Array.new(@hiddenTreasures)
+    
+       @visiblet.each do |vt|
+         discardVisibleTreasures(vt) #1.2
        end
        
-    @hiddenTreasures.each do |ht|
-      @treasure=@hiddenTreasures.next #1.3
-      discardHiddenTreasure(treasure) #1.4
+    @hiddent.each do |ht|
+      discardHiddenTreasures(ht) #1.4
     end
   end
     
@@ -149,7 +170,7 @@ def setPendingBadConsequence(b)
    end
   end
   
- def applyBadConsequence(b)
+ def applyBadConsequence(m)
    @badConsequence=m.getBadConsequence #1
    @nLevels=badConsequence.getLevels #2
    decrementLevels(nLevels) #3

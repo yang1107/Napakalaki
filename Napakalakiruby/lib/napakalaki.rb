@@ -64,13 +64,16 @@ def initialize(cp,p,d,cm)
   end
     
   def developCombat
-        
+    @result=@currentPlayer.combat(@currentMonster) #1.1
+    @dealer.giveMonsterBack(m)   #1.2
+    
+    return @result
   end
     
   def discardVisibleTreasures( treasures)
         treasures.each do |t|
           @treasure=t.next #1.1
-          @currentPlayer.discardVisibleTreasure(t) #1.2
+          @currentPlayer.discardVisibleTreasures(t) #1.2
           dealer.giveTreasureBack(t) #1.3
         end
   end
@@ -78,7 +81,7 @@ def initialize(cp,p,d,cm)
   def discardHiddenTreasures(treasures)
         treasures.each do |t|
           @treasure=t.next #1.1
-          @currentPlayer.discardHiddenTreasure(t) #1.2
+          @currentPlayer.discardHiddenTreasures(t) #1.2
           dealer.giveTreasureBack(t) #1.3
         end
   end

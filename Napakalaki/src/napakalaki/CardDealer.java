@@ -25,13 +25,12 @@ public class CardDealer {
     }
     
     public static CardDealer getInstance() {
-        return CardDealerHolder.INSTANCE;
+        if(instance==null){
+            instance=new CardDealer();
+        }
+        return instance;
     }
     
-    private static class CardDealerHolder {
-
-        private static final CardDealer INSTANCE = new CardDealer();
-    }
       
      
    private void initTreasureCardDeck(){
@@ -222,7 +221,7 @@ public class CardDealer {
    
    public void initCards(){
        this.initTreasureCardDeck();  //1.3.1
-       this.initTreasureCardDeck();  //1.3.2
+       this.initMonsterCardDeck();  //1.3.2
    }
    
 }

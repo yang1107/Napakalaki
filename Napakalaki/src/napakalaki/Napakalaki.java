@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 public class Napakalaki {
     
+    private static Napakalaki instance = null;
     private Player currentPlayer;
     private ArrayList<Player> players;
     private CardDealer dealer;
@@ -22,17 +23,17 @@ public class Napakalaki {
     }
     
     public static Napakalaki getInstance() {
-        return NapakalakiHolder.INSTANCE;
+        if (instance == null) {
+            instance = new Napakalaki();
+        }
+        return instance;
     }
     
-    private static class NapakalakiHolder {
-
-        private static final Napakalaki INSTANCE = new Napakalaki();
-    }
     
     private void initPlayers(ArrayList<String> names){
-        for(int i=0;i<names.size();i++){
-           players.add(new Player(names.get(i)));
+        players=new ArrayList();
+        for (String name : names) {
+            players.add(new Player(name));
         }
     }
 
@@ -77,13 +78,16 @@ public class Napakalaki {
     }
     
     public CombatResult developCombat(){
-        this.currentPlayer.combat(currentMonster);
+        CombatResult result;
+        result=this.currentPlayer.combat(currentMonster); //1.1
+        CardDealer.getInstance().giveMonsterBack(currentMonster);  //1.2
+        return result;
     }
     
     public void discardVisibleTreasures(ArrayList<Treasure> treasures){
         for(Treasure t: treasures){//1.1
             //Treasure treasure=treasures.next();  //1.1
-            this.currentPlayer.discardVisibleTreasure(t); //1.2
+            this.currentPlayer.discardVisibleTreasures(t); //1.2
             this.dealer.giveTreasureBack(t); //1.3
         }
     }
@@ -91,7 +95,7 @@ public class Napakalaki {
     public void discardHiddenTreasures(ArrayList<Treasure> treasures){
          for(Treasure t: treasures){
             //Treasure treasure=treasures.next();  //1.1
-            this.currentPlayer.discardHiddenTreasure(t); //1.2
+            this.currentPlayer.discardHiddenTreasures(t); //1.2
             this.dealer.giveTreasureBack(t); //1.3
          }
     }
@@ -107,7 +111,7 @@ public class Napakalaki {
         
         this.initPlayers(players); //1.1
         this.setEnemies();  //1.2
-        dealer.initCards();  //1.3
+        this.dealer.initCards();  //1.3
         this.nextTurn();  //1.4
     }
     

@@ -131,21 +131,34 @@ public class Player {
    }
    
    public ArrayList<Treasure> getHiddenTreasures(){
-       return null;
+       return this.hiddenTreasures;
    }
    
-   public ArrayList<Treasure> getVisivleTreasures(){
-       return null;
+   public ArrayList<Treasure> getVisibleTreasures(){
+       return this.visibleTreasures;
    }
    
    public CombatResult combat(Monster m){
-       int myLevel=this.getLevels();  //1.1.1
-       int monsterLevel=this.getCombatLevel(); //1.1.2
+       CombatResult result;
+       int myLevel=this.getCombatLevel();  //1.1.1
+       int monsterLevel=m.getCombatLevel(); //1.1.2
        
        if(myLevel>monsterLevel){
-           this.applyPrize(m);
+           this.applyPrize(m); //1.1.3
+           
+           if(myLevel>MAXLEVEL){
+               result=CombatResult.WINGAME;
+           }
+           else{
+               result=CombatResult.WIN;
+           }
        }
-       
+       else{
+           this.applyBadConsequence(m); //1.1.4
+           
+           result=CombatResult.LOSE;
+       }
+       return result;
     }
    
    public void makeTreasureVisible(Treasure t){
@@ -156,7 +169,7 @@ public class Player {
        }
    }
    
-   public void discardVisibleTreasure(Treasure t){
+   public void discardVisibleTreasures(Treasure t){
        this.visibleTreasures.remove(t);  //1.2.1
        if((this.pendingBadConsequence!=null) && (!this.pendingBadConsequence.isEmpty())){ 
            this.pendingBadConsequence.substractVisibleTreasure(t);  //1.2.2
@@ -164,7 +177,7 @@ public class Player {
       this.dieIfNotTreasures(); // 1.2.3
    }
    
-   public void discardHiddenTreasure(Treasure t){
+   public void discardHiddenTreasures(Treasure t){
        this.hiddenTreasures.remove(t);  //1.2.1
        while((this.pendingBadConsequence!=null) && (!this.pendingBadConsequence.isEmpty())){ 
            this.pendingBadConsequence.substractHiddenTreasure(t);  //1.2.2
@@ -246,13 +259,14 @@ public class Player {
    
    public void discardAllTreasures(){
        Treasure treasure;
-       for(Treasure vt : this.visibleTreasures){
-         // treasure=vt.next(); //1.1
-          this.discardVisibleTreasure(vt); //1.2
+       ArrayList<Treasure> visiblet=new ArrayList(this.visibleTreasures);
+       ArrayList<Treasure> hiddent=new ArrayList(this.hiddenTreasures);
+       
+       for(Treasure vt : visiblet){
+          this.discardVisibleTreasures(vt); //1.2
        }
-       for(Treasure ht : this.hiddenTreasures){
-          // treasure=ht.next();  //1.3
-           this.discardHiddenTreasure(ht);  //1.4
+       for(Treasure ht : hiddent){
+           this.discardHiddenTreasures(ht);  //1.4
        }
    }
    

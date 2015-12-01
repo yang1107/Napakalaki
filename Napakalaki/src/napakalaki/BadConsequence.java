@@ -95,7 +95,27 @@ public class BadConsequence {
     }
     
     public BadConsequence adjustToFitTreasureLists(ArrayList<Treasure> v,ArrayList<Treasure> h){
-        return null;
+        ArrayList<TreasureKind> tVisible = new ArrayList();
+        ArrayList<TreasureKind> tHidden = new ArrayList();
+        
+            for (Treasure t: v) {
+  
+            if (!tVisible.contains(t.getType())) {
+                tVisible.add(t.getType());
+            }
+        }
+        
+
+        for (Treasure t: h) {
+      
+            if (!tHidden.contains(t.getType())) {
+                tHidden.add(t.getType());
+            }
+        }
+
+        BadConsequence bs = new BadConsequence(this.text, 0, tVisible, tHidden);
+
+        return bs;
     }
     
     

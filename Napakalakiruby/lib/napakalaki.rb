@@ -2,65 +2,19 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 require "singleton"
+require_relative "player.rb"
+require_relative "card_dealer.rb"
+require_relative "combat_result.rb"
+require_relative "prize.rb"
+require_relative "bad_consequence.rb"
 
 class Napakalaki
   include Singleton
   
-  attr_accesor:currentPlayer,:players,:dealer,:currentMonster
-  
-def initialize(cp,p,d,cm)
-    @currentPlayer=cp
-    @players=p
-    @dealer=d
-    @currentMonster=cm
-  end
+  attr_accessor:currentPlayer,:players,:dealer,:currentMonster
   
   def getInstance
     return Napakalaki.instance
-  end
-  
-  private def initPlayers(names)
-    @players=Array.new
-    i=0
-    while(i<names.size)
-      @players<<Player.new(names[i])
-      i=i+1
-    end
-  end
-  
-  private def nextPlayer
-        if(@currentPlayer==nil)
-          nextp=rand(@players.length)
-         else
-          indice=@players.index(@currentPlayer)
-          if(indice==@players.length)
-            nextp=@players[0]
-            else
-            nextp=@players[indice+1]
-          end
-       end
-  end
-    
-  private def nextTurnAllowed
-        @cumple=false
-        if(@currentPlayer.validState)
-          cumple=true
-        end
-        if(@currentPlayer==nil)
-          cumple=true
-        end
-        return cumple
-  end
-    
-  private def setEnemies
-      i=0
-      while(i<@players.length)
-        numero=rand(@players.length)
-        while(numero==i)
-          numero=rand(@players.length)
-        end
-        @players[i].setEnemy(@players[numero])
-      end
   end
     
   def developCombat
@@ -109,17 +63,17 @@ def initialize(cp,p,d,cm)
   end
     
   def nextTurn
-        @stateOk=nextTurnAllowed #1.1
+        stateOK=nextTurnAllowed #1.1
         
-    if(stateOK)
+    if stateOK then
       @currentMonster=dealer.nextMonster
       @currentPlayer=nextPlayer
-      @dead=currentPlayer.isDead
-      if(dead)
+      @dead=@currentPlayer.isDead
+      if dead then
         @currentPlayer.initTreasures
       end
     end
-    return @stateOK
+    return stateOK
   end
     
   def endOfGame( result)
@@ -128,6 +82,53 @@ def initialize(cp,p,d,cm)
           res=true
         end
         return res
+  end
+  
+  
+  private
+  
+  def initPlayers(names)
+    @dealer=CardDealer.instance
+    @players=Array.new
+    
+     names.each do |nm|
+      players<<Player.new(nm)
+    end
+  end
+  
+  def nextPlayer
+        if(@currentPlayer==nil)
+          nextp=rand(@players.length)
+         else
+          indice=@players.index(@currentPlayer)
+          if(indice==@players.length)
+            nextp=@players[0]
+            else
+            nextp=@players[indice+1]
+          end
+       end
+  end
+    
+  def nextTurnAllowed
+        @allowed=false
+        if @current_player == nil then
+            allowed = true 
+        else
+            allowed = @currentPlayer.validState #1.1.1
+        end
+        return allowed
+  end
+    
+  def setEnemies
+      i=0
+      while(i<@players.length)
+        numero=rand(@players.length)
+        while(numero==i)
+          numero=rand(@players.length)
+        end
+        @players[i].setEnemy(@players[numero])
+        i=i+1
+      end
   end
   
 end

@@ -103,28 +103,72 @@ class BadConsequence
     end
     
     def adjustToFitTreasureLists(v,h)
-        t_visible = Array.new
-        t_hidden = Array.new
-        
-       
-        v.each do |t|
-           
-            if t_visible.index(t.type) == nil then
-                t_visible << t.type
-            end
-        end
-        
+      visibles=0
+      ocultos=0
+      espVisibles=Array.new
+      espOcultos=Array.new
       
-        h.each do |t|
-        
-            if t_hidden.index(t.type) == nil then
-                t_hidden << t.type
-            end
+      if(@nVisiblesTreasures > 0)
+        if(@nVisiblesTreasures > v.length)
+          visibles=v.length
+        else
+          visibles=@nVisibleTreasures
         end
-
-         bs = BadConsequence.newLevelSpecificTreasures(@text, 0, t_visible, t_hidden)
-
-        return bs
+      else
+        @nSpecificVisibleTreasures.each do |sv|
+          v.each do |vt|
+            if(vt.getType==sv)
+              espVisible<<sv
+            end
+          end
+        end
+      end
+      
+      if(@nHiddenTreasures>0)
+        if(@nHiddenTreasures>h.length)
+          ocultos=h.length
+        else
+          ocultos=@nHiddenTreasures
+        end
+      else
+        @nSpecificHiddenTreasures.each do |sh|
+          h.each do |ht|
+            if(ht.getType==sh)
+              espOcultos<<sh
+            end
+          end
+        end
+      end
+      
+      res=BadConsequence.newLevelSpecificTreasures(aText, 0, espVisibles, espOcultos)
+      res.nHiddenTreasures=ocultos
+      res.nVisibleTreasures=visibles
+      
+      return res
+      
+      
+#        t_visible = Array.new
+#        t_hidden = Array.new
+#        
+#       
+#        v.each do |t|
+#           
+#            if t_visible.index(t.type) == nil then
+#                t_visible << t.type
+#            end
+#        end
+#        
+#      
+#        h.each do |t|
+#        
+#            if t_hidden.index(t.type) == nil then
+#                t_hidden << t.type
+#            end
+#        end
+#
+#         bs = BadConsequence.newLevelSpecificTreasures(@text, 0, t_visible, t_hidden)
+#
+#        return bs
     end
     
     

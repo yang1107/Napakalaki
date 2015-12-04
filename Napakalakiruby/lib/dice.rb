@@ -6,13 +6,10 @@ require "singleton"
 class Dice
   include Singleton
   
-  def initialize
-    
-  end
-  
   def getInstance
     return Dice.instance
   end
+  
   def self.nextNumber
     return 1+rand(6)
   end

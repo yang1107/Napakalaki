@@ -2,23 +2,64 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 require "singleton"
+require_relative "monster.rb"
+require_relative "treasure_kind.rb"
+require_relative "prize.rb"
+require_relative "treasure.rb"
 
 class CardDealer
   include Singleton
   
-  attr_accesor :unusedMonsters,:usedMonsters,:unusedTreasures,:usedTreasures
+  attr_accessor :unusedMonsters,:usedMonsters,:unusedTreasures,:usedTreasures
+
   
-  def initialize(unusedM,usedM,unusedT,usedT)
-    @unusedMonsters=unusedM
-    @usedMonsters=usedM
-    @unusedTreasures=unusedT
-    @usedTreasures=usedT
+  def nextTreasure
+    if(@unusedTreasures.empty?)
+      @usedTreasures.each do |u|
+        @unusedTreasures<<u
+      end
+      shuffleTreasures
+      @usedTreasures.clear
+    end
+    
+    aux=@unusedTreasures[0]
+      @usedTreasures<<aux
+      @unusedTreasures.delete(aux)
+  end
+   
+  def nextMonster
+    @unusedMonsters=Array.new
+    @usedMonsters=Array.new
+    if @unusedMonsters.empty?
+      @usedMonsters.each do |u|
+        @unusedMonsters<<u
+      end
+      shuffleMonsters
+      @usedMonsters.clear
+    end
+    
+    aux=@unusedMonsters[0]
+      @usedMonsters<<aux
+      @unusedMonsters.delete(aux)
+  end
+   
+  def giveTreasureBack(t)
+       @usedTreasures.add(t)
+  end
+   
+  def giveMonsterBack( m)
+       @usedMonsters.add(m)
+  end
+   
+  def initCards
+       initTreasuresCardDeck #1.3.1
+       initMonsterCardDeck #1.3.2
   end
   
-  def getInstance
-    return CardDealer.instance
-  end
-  private def initTreasureCardDeck
+  
+  private
+  
+  def initTreasureCardDeck
        @unusedTreasures << Treasure.new("Si mi amo", 4, TreasureKind::HELMET)
        @unusedTreasures << Treasure.new("Botas de investigacion", 3, TreasureKind::SHOES)
        @unusedTreasures << Treasure.new("Capucha de Cthulhu", 3, TreasureKind::HELMET)
@@ -34,7 +75,7 @@ class CardDealer
        @unusedTreasures << Treasure.new("El aparato del Pr. Tesla", 4, TreasureKind::ARMOR)
        @unusedTreasures << Treasure.new("Gaita", 4, TreasureKind::BOTHHAND)
        @unusedTreasures << Treasure.new("Insecticida", 2, TreasureKind::ONEHAND)
-       @unusedTreasures << Treasure.new("Escopeta de 3 cañones",4 , TreasureKind::BOTHHAND)
+       @unusedTreasures << Treasure.new("Escopeta de 3 caniones",4 , TreasureKind::BOTHHAND)
        @unusedTreasures << Treasure.new("Garabato mistico", 2, TreasureKind::ONEHAND)
        @unusedTreasures << Treasure.new("La rebeca metalica", 2, TreasureKind::ARMOR)
        @unusedTreasures << Treasure.new("Lanzallamas", 4, TreasureKind::BOTHHAND)
@@ -52,7 +93,8 @@ class CardDealer
        @unusedTreasures << Treasure.new("Varita de atizamiento", 3, TreasureKind::ONEHAND)
   end
    
-  private def initMonsterCardDeck
+  def initMonsterCardDeck
+    
         prize1 = Prize.new(4,2)
         badConsequence1 = BadConsequence.newLevelNumberOfTreasures("Pierdes 5 niveles y 3 tesoros visibles",5,3,0);
         @unusedMonsters << Monster.new("el rey de rosa",13,prize1,badConsequence1)
@@ -127,53 +169,12 @@ class CardDealer
         
   end
    
-  private def shuffleTreasures
-    collections.shuffle(@unusedTreasures)
+  def shuffleTreasures
+    @unusedTreasures.shuffle
   end
    
-  private def shuffleMonsters
-       collections.shuffle(@unusedMonsters)
-  end
-  
-  def nextTreasure
-    if(@unusedTreasures.length==0)
-      @usedTreasures.each do |u|
-        @unusedTreasures<<u
-      end
-      shuffleTreasures
-      @usedTreasures.clear
-    end
-    
-    aux=@unusedTreasures[0]
-      @usedTreasures<<aux
-      @unusedTreasures.delete(aux)
-  end
-   
-  def nextMonster
-       if(@unusedMonsters.length==0)
-      @usedMonsters.each do |u|
-        @unusedMonsters<<u
-      end
-      shuffleMonsters
-      @usedMonsters.clear
-    end
-    
-    aux=@unusedMonsters[0]
-      @usedMonsters<<aux
-      @unusedMonsters.delete(aux)
-  end
-   
-  def giveTreasureBack(t)
-       @usedTreasures.add(t)
-  end
-   
-  def giveMonsterBack( m)
-       @usedMonsters.add(m)
-  end
-   
-  def initCards
-       initTreasuresCardDeck #1.3.1
-       initMonsterCardDeck #1.3.2
+  def shuffleMonsters
+    @unusedMonsters.shuffle
   end
   
 end

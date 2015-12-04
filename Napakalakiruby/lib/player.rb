@@ -2,6 +2,13 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 
+require_relative "dice.rb"
+require_relative "treasure.rb"
+require_relative "monster.rb"
+require_relative "treasure_kind.rb"
+require_relative "combat_result.rb"
+
+
 class Player
   
   attr_reader :name,:level,:dead,:canISteal,:enemy,:visibleTreasures,:hiddenTreasures,:pendingBadConsequence
@@ -16,7 +23,7 @@ class Player
    
   
   def isDead
-      return @dead
+      @dead
   end
    
   def combat(m)

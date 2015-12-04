@@ -34,8 +34,8 @@ public class CardDealer {
       
      
    private void initTreasureCardDeck(){
-       unusedTreasures=new ArrayList();
-       usedTreasures=new ArrayList();
+       this.unusedTreasures=new ArrayList();
+       this.usedTreasures=new ArrayList();
 
        unusedTreasures.add(new Treasure("si mi amo",4,TreasureKind.HELMET));
        unusedTreasures.add(new Treasure("Botas de investigacion",3,TreasureKind.SHOES));
@@ -71,8 +71,8 @@ public class CardDealer {
    }
    
    private void initMonsterCardDeck(){
-        unusedMonsters=new ArrayList();
-        usedMonsters=new ArrayList();
+        this.unusedMonsters=new ArrayList();
+        this.usedMonsters=new ArrayList();
         
         BadConsequence badConsequence1 = new BadConsequence("Pierdes 5 niveles y 3 tesoros visibles",5,3,0);
         Prize prize1 = new Prize(4,2);
@@ -221,7 +221,9 @@ public class CardDealer {
    
    public void initCards(){
        this.initTreasureCardDeck();  //1.3.1
+
        this.initMonsterCardDeck();  //1.3.2
+
    }
    
 }

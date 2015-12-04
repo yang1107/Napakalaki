@@ -5,7 +5,9 @@
  */
 package napakalaki;
 
+import static java.lang.Math.min;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -77,45 +79,67 @@ public class BadConsequence {
     }
     
     public void substractVisibleTreasure(Treasure t){
-        if(this.nVisibleTreasures>0){
-            this.nVisibleTreasures--;
+        if (this.nVisibleTreasures != 0){
+            nVisibleTreasures--;
         }
-        if(this.nVisibleTreasures==0){
-            this.specificVisibleTreasures.remove(t.getType());
+        else if (!this.specificVisibleTreasures.isEmpty()){
+            if (specificVisibleTreasures.contains(t.getType()))
+                specificVisibleTreasures.remove(t.getType());
         }
     }
     
      public void substractHiddenTreasure(Treasure t){
-         if(this.nHiddenTreasures>0){
-            this.nHiddenTreasures--;
+        if (this.nHiddenTreasures != 0){
+            nHiddenTreasures--;
         }
-        if(this.nHiddenTreasures==0){
-            this.specificHiddenTreasures.remove(t.getType());
+        else if (!this.specificHiddenTreasures.isEmpty()){
+            if (specificHiddenTreasures.contains(t.getType()))
+                specificHiddenTreasures.remove(t.getType());
         }
     }
     
     public BadConsequence adjustToFitTreasureLists(ArrayList<Treasure> v,ArrayList<Treasure> h){
-        ArrayList<TreasureKind> tVisible = new ArrayList();
-        ArrayList<TreasureKind> tHidden = new ArrayList();
-        
-            for (Treasure t: v) {
-  
-            if (!tVisible.contains(t.getType())) {
-                tVisible.add(t.getType());
+    int visibles=0;
+    int ocultos=0;
+    ArrayList<TreasureKind> espVisibles = new ArrayList();
+    ArrayList<TreasureKind> espOcultos = new ArrayList();
+
+        if(nVisibleTreasures > 0){ 
+            if(nVisibleTreasures > v.size()){
+                visibles = v.size();
+            }
+            else{
+                visibles = nVisibleTreasures;
             }
         }
-        
-
-        for (Treasure t: h) {
-      
-            if (!tHidden.contains(t.getType())) {
-                tHidden.add(t.getType());
+        else{ 
+            for (TreasureKind specificVisibleTreasure : specificVisibleTreasures) {
+                for(Treasure treasure : v){
+                    if(treasure.getType() == specificVisibleTreasure)
+                        espVisibles.add(specificVisibleTreasure);
+                }                 
             }
         }
-
-        BadConsequence bs = new BadConsequence(this.text, 0, tVisible, tHidden);
-
-        return bs;
+        if(nHiddenTreasures > 0){
+            if(nHiddenTreasures > h.size()){
+                ocultos = h.size();
+            }
+            else{
+                ocultos = nHiddenTreasures;
+            }
+        }
+        else{
+           for (TreasureKind specificHiddenTreasure : specificHiddenTreasures) {
+                for(Treasure treasure : h){
+                    if(treasure.getType() == specificHiddenTreasure)
+                        espOcultos.add(specificHiddenTreasure);
+                }                 
+            }
+        }
+       BadConsequence res = new BadConsequence("", 0, espVisibles, espOcultos);
+       res.nHiddenTreasures=ocultos;
+       res.nVisibleTreasures=visibles;
+       return res;
     }
     
     

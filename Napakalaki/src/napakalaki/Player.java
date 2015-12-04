@@ -52,6 +52,9 @@ public class Player {
    
    private void decrementLevels(int i){
        level=level-i;
+       if(level<1){
+           level=1;
+       }
    }
    
    private void setPendingBadConsequence(BadConsequence b){
@@ -75,36 +78,56 @@ public class Player {
    
    private void applyBadConsequence(Monster m){
        BadConsequence badConsequence=m.getBadConsequence();//1
-       int nLevels=badConsequence.getLevels();//2
+       int nLevels = badConsequence.getLevels();
        this.decrementLevels(nLevels);//3
-       this.pendingBadConsequence=badConsequence.adjustToFitTreasureLists(visibleTreasures, hiddenTreasures);//4
-       this.setPendingBadConsequence(pendingBadConsequence);
+       BadConsequence pendingBad=badConsequence.adjustToFitTreasureLists(visibleTreasures, hiddenTreasures);//4
+       this.setPendingBadConsequence(pendingBad); //5
    }
    
    private boolean canMakeTreasureVisible(Treasure t){
-       boolean res=true;
-       if(t.getType()!=TreasureKind.ONEHAND){
-       for(Treasure tre: visibleTreasures){
-           if(t.getType()==tre.getType()){
-               res=false;
+       int nOnehand=0;
+       int nBothhands=0;
+       int nArmor=0;
+       int nShoes=0;
+       int nHelmet=0;
+       boolean res=false;
+       
+       for (Treasure tre : visibleTreasures) {
+           if(tre.getType() == TreasureKind.ONEHAND){
+               nOnehand++;
+           }else if(tre.getType() ==  TreasureKind.BOTHHANDS){
+               nBothhands++;
+           }else if(tre.getType() == TreasureKind.ARMOR){
+               nArmor++;
+           }else if(tre.getType() ==  TreasureKind.SHOES){
+               nShoes++;
+           }else{
+               nHelmet++;
            }
        }
-      }
-       else{
-           int i=0;
-           for(Treasure tre: visibleTreasures){
-           if(t.getType()==TreasureKind.ONEHAND){
-               i++;
-           }
-           }
-           if(i==2){
-               res=false;
-           }
-           else{
-           res=true;
-            }
-       }
-        return res;
+       switch(t.getType()){
+            case ONEHAND:
+                if(nOnehand < 2 && nBothhands == 0)
+                    res = true;
+                break;
+            case BOTHHANDS:
+                if(nOnehand == 0 && nBothhands == 0)
+                    res = true;
+                break;
+            case HELMET:
+                if(nHelmet == 0)
+                    res = true;
+                break;
+            case SHOES:
+                if(nShoes == 0)
+                    res = true;
+                break;
+            case ARMOR:
+                if(nArmor == 0)
+                    res = true;
+                break;
+        }
+       return res;
    }
     
    private int howManyVisibleTreasures(TreasureKind tKind){
@@ -123,11 +146,7 @@ public class Player {
    }
    
    public boolean isDead(){
-       boolean res=false;
-       if(dead==true){
-           res=true;
-       }
-       return res;
+       return dead;
    }
    
    public ArrayList<Treasure> getHiddenTreasures(){
@@ -146,7 +165,7 @@ public class Player {
        if(myLevel>monsterLevel){
            this.applyPrize(m); //1.1.3
            
-           if(myLevel>MAXLEVEL){
+           if(this.level>=MAXLEVEL){
                result=CombatResult.WINGAME;
            }
            else{
@@ -187,7 +206,7 @@ public class Player {
    
    public boolean validState(){
        boolean res=false;
-        if(pendingBadConsequence.isEmpty() && hiddenTreasures.size()>4){
+        if(pendingBadConsequence==null||pendingBadConsequence.isEmpty() && hiddenTreasures.size()<=4 ){
             res=true;
         } 
         return res;
@@ -247,7 +266,7 @@ public class Player {
    
    private boolean canYouGiveMeATreasure(){
        boolean res=false;
-       if(this.hiddenTreasures.size()>0&&this.visibleTreasures.size()>0){
+       if(this.hiddenTreasures.size()>0){
            res=true;
        }
        return res;
@@ -270,6 +289,8 @@ public class Player {
        }
    }
    
-   
+    public String toString() {
+        return "Nombre: " + this.name + " Nivel: " + this.level;
+    }
    
 }

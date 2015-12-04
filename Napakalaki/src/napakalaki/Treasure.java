@@ -32,4 +32,8 @@ public class Treasure {
         return type;
     }
     
+
+     public String toString() {
+        return "Nombre: " + this.name + " Tipo: " + this.type;
+    }
 }

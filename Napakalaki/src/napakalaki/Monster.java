@@ -35,7 +35,7 @@ public class Monster {
     }
     
     public BadConsequence getBadConsequence(){
-        return null;
+        return this.bc;
     }
     
     public int getLevelsGained(){

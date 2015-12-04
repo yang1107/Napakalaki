@@ -162,13 +162,17 @@ public class PruebaNapakalaki {
         
         //comprobaciones
 
-//        Monster m1;
+//       Monster m1;
 //        BadConsequence badConsequence20 = new BadConsequence("Te atrapan para llevarte de fiesta y te dejan caer en mitad del vuelo. Descarta 1 mano visible y 1 mano oculta",0,
 //                                                             new ArrayList(Arrays.asList(TreasureKind.ONEHAND)),
-//                                                             new ArrayList(Arrays.asList(TreasureKind.ONEHAND)));
-//        Prize prize20 = new Prize(4,1);
-//        m1=new Monster("Angeles de la noche ibicenca",14,badConsequence20,prize20);
-//        System.out.println(m1);
+//                                                            new ArrayList(Arrays.asList(TreasureKind.ONEHAND)));
+//       Prize prize20 = new Prize(4,1);
+//       m1=new Monster("Angeles de la noche ibicenca",14,badConsequence20,prize20);
+//       
+//       System.out.println(m1);
+//       
+//       BadConsequence badc=m1.getBadConsequence();
+//        System.out.println(badc);
 //        
         
         //filtro_niveles10(monstruos);

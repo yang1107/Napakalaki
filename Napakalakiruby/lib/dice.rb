@@ -6,11 +6,8 @@ require "singleton"
 class Dice
   include Singleton
   
-  def getInstance
-    return Dice.instance
-  end
   
-  def self.nextNumber
+  def nextNumber
     return 1+rand(6)
   end
   

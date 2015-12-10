@@ -10,8 +10,7 @@ require_relative "treasure.rb"
 class CardDealer
   include Singleton
   
-  attr_accessor :unusedMonsters,:usedMonsters,:unusedTreasures,:usedTreasures
-
+  attr_accessor :unusedTreasures,:usedTreasures,:unusedMonsters,:usedMonsters
   
   def nextTreasure
     if(@unusedTreasures.empty?)
@@ -27,32 +26,18 @@ class CardDealer
       @unusedTreasures.delete(aux)
   end
    
-  def nextMonster
-    @unusedMonsters=Array.new
-    @usedMonsters=Array.new
-    if @unusedMonsters.empty?
-      @usedMonsters.each do |u|
-        @unusedMonsters<<u
-      end
-      shuffleMonsters
-      @usedMonsters.clear
-    end
-    
-    aux=@unusedMonsters[0]
-      @usedMonsters<<aux
-      @unusedMonsters.delete(aux)
-  end
+
    
   def giveTreasureBack(t)
-       @usedTreasures.add(t)
+       @usedTreasures<<t
   end
    
   def giveMonsterBack( m)
-       @usedMonsters.add(m)
+       @usedMonsters<<m
   end
    
   def initCards
-       initTreasuresCardDeck #1.3.1
+       initTreasureCardDeck #1.3.1
        initMonsterCardDeck #1.3.2
   end
   
@@ -60,6 +45,8 @@ class CardDealer
   private
   
   def initTreasureCardDeck
+    @unusedTreasures=Array.new
+    @usedTreasures=Array.new
        @unusedTreasures << Treasure.new("Si mi amo", 4, TreasureKind::HELMET)
        @unusedTreasures << Treasure.new("Botas de investigacion", 3, TreasureKind::SHOES)
        @unusedTreasures << Treasure.new("Capucha de Cthulhu", 3, TreasureKind::HELMET)
@@ -94,7 +81,8 @@ class CardDealer
   end
    
   def initMonsterCardDeck
-    
+    @unusedMonsters=Array.new
+    @usedMonsters=Array.new
         prize1 = Prize.new(4,2)
         badConsequence1 = BadConsequence.newLevelNumberOfTreasures("Pierdes 5 niveles y 3 tesoros visibles",5,3,0);
         @unusedMonsters << Monster.new("el rey de rosa",13,prize1,badConsequence1)
@@ -177,4 +165,19 @@ class CardDealer
     @unusedMonsters.shuffle
   end
   
+  
+  public
+    def nextMonster
+    if @unusedMonsters.empty?
+      @usedMonsters.each do |u|
+        @unusedMonsters<<u
+      end
+      shuffleMonsters
+      @usedMonsters.clear
+    end
+    
+    aux=@unusedMonsters[0]
+      @usedMonsters<<aux
+      @unusedMonsters.delete(aux)
+  end
 end

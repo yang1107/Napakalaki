@@ -5,7 +5,7 @@
 require_relative "napakalaki"
 require_relative "GameTester"
 
-module Napakalakiruby
+
 
   class EjemploMain
    
@@ -26,4 +26,4 @@ module Napakalakiruby
     e = EjemploMain.new
     e.prueba()
 
-end
+

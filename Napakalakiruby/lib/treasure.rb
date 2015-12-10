@@ -11,4 +11,9 @@ class Treasure
     @type=t
   end
   
+  
+  def
+    to_s
+    "Nombre: #{@name} \nTipo : #{@type}"
+  end
 end

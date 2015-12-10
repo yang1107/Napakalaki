@@ -37,10 +37,10 @@ class Monster
     end
     
     def getLevelsGained()
-      return self.price.getLevel
+      return @price.getLevel
     end
     
     def getTreasuresGained
-      return self.price.getTreasures
+      return @price.getTreasures
     end
 end

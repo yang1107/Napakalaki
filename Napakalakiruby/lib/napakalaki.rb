@@ -13,20 +13,16 @@ class Napakalaki
   
   attr_accessor:currentPlayer,:players,:dealer,:currentMonster
   
-  def getInstance
-    return Napakalaki.instance
-  end
     
   def developCombat
     @result=@currentPlayer.combat(@currentMonster) #1.1
-    @dealer.giveMonsterBack(m)   #1.2
+    @dealer.giveMonsterBack(@currentMonster)   #1.2
     
     return @result
   end
     
   def discardVisibleTreasures( treasures)
         treasures.each do |t|
-          @treasure=t.next #1.1
           @currentPlayer.discardVisibleTreasures(t) #1.2
           dealer.giveTreasureBack(t) #1.3
         end
@@ -34,7 +30,6 @@ class Napakalaki
     
   def discardHiddenTreasures(treasures)
         treasures.each do |t|
-          @treasure=t.next #1.1
           @currentPlayer.discardHiddenTreasures(t) #1.2
           dealer.giveTreasureBack(t) #1.3
         end
@@ -50,8 +45,9 @@ class Napakalaki
   def initGame( players)
         initPlayers(players) #1.1
         setEnemies #1.2
+        CardDealer.instance.initCards #1.3
         nextTurn #1.4
-        dealer.initCards #1.3
+        
   end
     
   def getCurrentPlayer
@@ -69,7 +65,7 @@ class Napakalaki
       @currentMonster=dealer.nextMonster
       @currentPlayer=nextPlayer
       @dead=@currentPlayer.isDead
-      if dead then
+      if @dead then
         @currentPlayer.initTreasures
       end
     end
@@ -98,15 +94,17 @@ class Napakalaki
   
   def nextPlayer
         if(@currentPlayer==nil)
-          nextp=rand(@players.length)
+          nextp=@players.at(rand(@players.length-1))
          else
           indice=@players.index(@currentPlayer)
-          if(indice==@players.length)
+          if(indice==@players.length-1)
             nextp=@players[0]
             else
             nextp=@players[indice+1]
           end
        end
+       @currentPlayer=nextp
+       return @currentPlayer
   end
     
   def nextTurnAllowed

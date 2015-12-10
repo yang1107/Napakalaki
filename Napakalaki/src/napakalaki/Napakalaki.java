@@ -53,7 +53,8 @@ public class Napakalaki {
                 nextp=players.get(indice+1);
             }
         }
-       return nextp;    
+        this.currentPlayer=nextp;
+       return currentPlayer;    
     }
     
     private boolean nextTurnAllowed(){

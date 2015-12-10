@@ -221,9 +221,9 @@ public class CardDealer {
    
    public void initCards(){
        this.initTreasureCardDeck();  //1.3.1
-       this.shuffleTreasures();
+       //this.shuffleTreasures();
        this.initMonsterCardDeck();  //1.3.2
-       this.shuffleMonsters();
+      // this.shuffleMonsters();
    }
    
 }

@@ -99,6 +99,7 @@ public class BadConsequence {
     }
     
     public BadConsequence adjustToFitTreasureLists(ArrayList<Treasure> v,ArrayList<Treasure> h){
+        /*
     int visibles=0;
     int ocultos=0;
     ArrayList<TreasureKind> espVisibles = new ArrayList();
@@ -140,7 +141,45 @@ public class BadConsequence {
        res.nHiddenTreasures=ocultos;
        res.nVisibleTreasures=visibles;
        return res;
+                */
+        
+        BadConsequence resultado=null;
+        levels=0;
+        if(this.specificVisibleTreasures.isEmpty()&&this.specificHiddenTreasures.isEmpty()){
+            int visibles,ocultos;
+            
+            visibles=Math.min(v.size(), this.nVisibleTreasures);
+            ocultos=Math.min(h.size(), this.nHiddenTreasures);
+            
+            resultado=new BadConsequence(this.getText(),this.getLevels(),visibles,ocultos);
+        }
+        else if(!v.isEmpty() || !h.isEmpty()){
+            ArrayList<TreasureKind> visiblesR=new ArrayList();
+            ArrayList<TreasureKind> ocultosR=new ArrayList();
+            
+            visiblesR=interseccion(v, this.specificVisibleTreasures);
+            ocultosR=interseccion(h, this.getSpecificHiddenTreasures());
+            
+            resultado=new BadConsequence(this.getText(),this.getLevels(),visiblesR,ocultosR);
+        }
+        
+        return resultado;
     }
     
+    
+    private ArrayList<TreasureKind> interseccion(ArrayList<Treasure> tesoros, ArrayList<TreasureKind> tipos){
+        ArrayList<TreasureKind> resultado=new ArrayList();
+        ArrayList<Treasure> copiaTesoros=new ArrayList();
+        
+        copiaTesoros.addAll(tesoros);
+        
+        for(Treasure t : tesoros){
+            if(tipos.contains(t.getType())){
+                resultado.add(t.getType());
+                copiaTesoros.remove(t);
+            }
+        }
+        return resultado;
+    }
     
 }

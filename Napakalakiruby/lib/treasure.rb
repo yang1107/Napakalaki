@@ -14,6 +14,6 @@ class Treasure
   
   def
     to_s
-    "Nombre: #{@name} \nTipo : #{@type}"
+    "Nombre: #{@name} \nTipo : #{@type} \nBonus : #{@bonus}"
   end
 end

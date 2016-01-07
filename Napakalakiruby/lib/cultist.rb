@@ -2,9 +2,14 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 
-module CombatResult
-    WINGAME=:WINGAME
-    WIN=:WIN
-    LOSE=:LOSE
-    LOSEANDCONVERT=:LOSEANDCONVERT
+class Cultist
+  
+  attr_accessor:name,:gainedLevels
+  
+  def initialize(nm,glv)
+    @name=nm
+    @gainedLevels=glv
+  end
+  
+  
 end

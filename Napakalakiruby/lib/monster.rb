@@ -4,11 +4,12 @@
 
 class Monster
   def
-    initialize( nm,  lv,prc,  badconseq)
+    initialize( nm,  lv,prc,  badconseq,ic=0)
         @name=nm;
         @combatLevel=lv;
         @bc=badconseq;
         @price=prc;
+        @levelChangeAgainstCultistPlayer=ic
   end
 
   
@@ -31,9 +32,14 @@ class Monster
         @combatLevel
     end
     
+    def getCombatLevelAgainstCultistPlayer
+      level=getCombatLevel+@levelChangeAgainstCultistPlayer
+      return level
+    end
+    
     def
       to_s()
-      "#{@name}\nnivel de combate: #{@combatLevel}\n#{@bc}\n#{@price}"
+      "#{@name}\nnivel de combate: #{@combatLevel}\n#{@bc}\n#{@price} \nIC : #{@levelChangeAgainstCultistPlayer}"
     end
     
     def getLevelsGained()

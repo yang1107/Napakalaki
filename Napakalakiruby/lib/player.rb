@@ -7,6 +7,7 @@ require_relative "treasure.rb"
 require_relative "monster.rb"
 require_relative "treasure_kind.rb"
 require_relative "combat_result.rb"
+require_relative "numeric_bad_consequence.rb"
 
 
 class Player
@@ -20,8 +21,17 @@ class Player
     @dead=true
     @visibleTreasures=Array.new 
     @hiddenTreasures=Array.new
+    @pendingBadConsequence = NumericBadConsequence.new("", 0, 0, 0)
   end
    
+  def consCopia(p)
+    @name=p.name
+    @level=p.level
+    @dead=p.dead
+    @visibleTreasures=p.visibleTreasures
+    @hiddenTreasures=p.hiddenTreasures
+    @pendingBadConsequence=p.pendingBadConsequence
+  end
   
   def isDead
       @dead
@@ -29,7 +39,7 @@ class Player
    
   def combat(m)
        myLevel=getCombatLevel  #1.1.1
-       monsterLevel=m.getCombatLevel  #1.1.2
+       monsterLevel=getOponentLevel(m) #1.1.2
        
     if(myLevel>monsterLevel)
       applyPrize(m)  #1.1.3
@@ -153,6 +163,20 @@ class Player
     to_s
     "Nombre: #{@name} Nivel : #{@level}"
   end
+  
+  def getOponentLevel(m)
+    return m.getCombatLevel
+  end
+  
+  def shouldConvert()
+    should=false
+    dice=Dice.instance
+    if(dice.nextNumber==1)
+      should=true
+    end
+    return should
+  end
+  
     
   private
   
@@ -261,7 +285,7 @@ def canMakeTreasureVisible(t)
  
  def canYouGiveMeATreasure
        res=false
-       if(@hiddenTreasures.length>0 && @visibleTreasures.length>0)
+       if(@hiddenTreasures.length>0)
          res=true
        end
        res
@@ -270,4 +294,5 @@ def canMakeTreasureVisible(t)
  def haveStolen
        @canISteal=false
   end
+  
 end

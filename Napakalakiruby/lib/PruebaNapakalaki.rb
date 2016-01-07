@@ -134,9 +134,10 @@ end
 # prize17=Prize.new(1,1)
 #        badConsequence17= BadConsequence.newLevelNumberOfTreasures("Menudo susto te llevas. Pierdes 2 niveles y 5 tesoros visibles",2,5,0);
 #      
-#m1=  Monster.new("El Lenguas",20,prize17,badConsequence17)
+#m1=  Monster.new("El Lenguas",20,prize17,badConsequence17,3)
 #puts m1
-#
+
+
 
 
 

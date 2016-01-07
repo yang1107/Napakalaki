@@ -15,10 +15,20 @@ class Napakalaki
   
     
   def developCombat
-    @result=@currentPlayer.combat(@currentMonster) #1.1
+    result=@currentPlayer.combat(@currentMonster) #1.1
+    
+    if(result==CombatResult::LOSEANDCONVERT)
+      cultistcard=@dealer.nextCultist
+      cultistp=CultistPlayer.new(@currentPlayer,cultistcard)
+      currentpind=@players.index(@currentPlayer)
+      @players.insert(currentpind, cultistp)
+      @players.delete(@currentPlayer)
+      @currentPlayer = cultistp
+    end
+    
     @dealer.giveMonsterBack(@currentMonster)   #1.2
     
-    return @result
+    return result
   end
     
   def discardVisibleTreasures( treasures)

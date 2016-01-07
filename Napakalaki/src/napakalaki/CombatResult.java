@@ -10,5 +10,5 @@ package napakalaki;
  * @author chen__000
  */
 public enum CombatResult {
-     WINGAME,WIN,LOSE;
+     WINGAME,WIN,LOSE,LOSEANDCONVERT;
 }

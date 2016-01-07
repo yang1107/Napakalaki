@@ -12,8 +12,9 @@ package napakalaki;
 public class Monster {
     private String name;
     private int combatLevel;
-     public Prize price;
+    public Prize price;
     public BadConsequence bc;
+    private int levelChangeAgainstCultistPlayer;
     
     public String getName(){
         return name;
@@ -29,9 +30,26 @@ public class Monster {
         combatLevel=lv;
         bc=badconseq;
         price=prc;
+        this.levelChangeAgainstCultistPlayer=0;
     }
+    
+     public Monster(String nm, int lv, BadConsequence badconseq, Prize prc,int IC){
+        name=nm;
+        combatLevel=lv;
+        bc=badconseq;
+        price=prc;
+        this.levelChangeAgainstCultistPlayer=IC;
+    }
+     
+     public int getCombatLevelAgainstCultistPlayer(){
+         int lv;
+         lv=this.getCombatLevel()+this.levelChangeAgainstCultistPlayer;
+         return lv;
+     }
+     
+     
     public String toString(){
-      return name+ "\nNivel de combate = " + combatLevel + "\n" + bc + "\n" + price;
+      return name+ "\nNivel de combate = " + combatLevel + "\n" + bc + "\n" + price + "\nNivel contra sectario = " + levelChangeAgainstCultistPlayer;
     }
     
     public BadConsequence getBadConsequence(){
